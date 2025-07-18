@@ -22,8 +22,10 @@ services:
       - CACHE_STORE=redis
       - SESSION_DRIVER=redis
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - bookstack_network
 
@@ -40,6 +42,12 @@ services:
       - dbdata:/var/lib/mysql
     ports:
       - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${DB_USERNAME}", "-p${DB_PASSWORD}"]
+      timeout: 10s
+      retries: 5
+      interval: 10s
+      start_period: 30s
     networks:
       - bookstack_network
 
