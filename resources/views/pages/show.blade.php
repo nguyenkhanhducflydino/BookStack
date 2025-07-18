@@ -58,7 +58,7 @@
                     <div class="card-body">
                         @if ($page->content)
                             <div class="page-content">
-                                {!! $page->html !!}
+                                {!! $page->content_html !!}
                             </div>
                         @else
                             <div class="text-center py-5">
