@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
 
 // Home and Search routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -50,4 +51,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/books/{book}/chapters/{chapter}', [ChapterController::class, 'show'])->name('chapters.show');
     Route::get('/admin/books/{book}/pages/{page}', [PageController::class, 'show'])->name('pages.show');
     Route::get('/admin/books/{book}/chapters/{chapter}/pages/{page}', [PageController::class, 'show'])->name('chapter.pages.show');
+
+    // Payment routes
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/payment/create-intent', [PaymentController::class, 'createPaymentIntent'])->name('payment.create-intent');
+    Route::get('/payment/success', [PaymentController::class, 'handleSuccess'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
+    Route::get('/payment/history', [PaymentController::class, 'history'])->name('payment.history');
 });
+
+// Webhook route (no auth required)
+Route::post('/stripe/webhook', [PaymentController::class, 'webhook'])->name('stripe.webhook');

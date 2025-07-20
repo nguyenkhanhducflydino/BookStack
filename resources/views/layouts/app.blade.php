@@ -17,6 +17,9 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -87,6 +90,12 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('books.create') }}">
                                         <i class="bi bi-plus-circle me-2"></i>Create Book
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('payment.index') }}">
+                                        <i class="bi bi-credit-card me-2"></i>Payment Plans
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('payment.history') }}">
+                                        <i class="bi bi-clock-history me-2"></i>Payment History
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
